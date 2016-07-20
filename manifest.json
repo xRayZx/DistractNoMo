@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Distract No Mo",
+  "description": "Increase productivity by blocking temporarily blocking websites.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+		"default_title": "Enter websites that distract you"
+  },
+  "permissions": [
+    "activeTab",
+		"tabs",
+		"webRequest",
+		"webRequestBlocking",
+		"*://*/*"
+	]
+}
