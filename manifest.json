@@ -11,10 +11,9 @@
 		"default_title": "Enter websites that distract you"
   },
   "permissions": [
-    "activeTab",
 		"tabs",
 		"webRequest",
 		"webRequestBlocking",
-		"*://*/*"
+		"storage"
 	]
 }
