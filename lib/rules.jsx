@@ -2,17 +2,19 @@ const React = require('react');
 
 const Rules = React.createClass({
 	getInitialState() {
-		this.rules = [];
-		chrome.storage.local.get(null, (storage) => {
-			this.rules = storage['rules'];
-		})
-		debugger
+		// this.rules = [];
+		// chrome.storage.local.get(null, (storage) => {
+		//   this.rules = storage['rules'];
+		// })
 		return(
-			{rules: this.rules}
+			{rules: []}
 		);
 	},
 	componentDidMount () {
-		chrome.storage.onChanged.addListener(this.handleChange, "local");
+		// chrome.storage.onChanged.addListener(this.handleChange, "local");
+		chrome.storage.local.get(null, (storage) => {
+			this.setState({rules: storage['rules']});
+		})
 	},
 	handleChange () {
 		this.rules = [];
@@ -23,24 +25,22 @@ const Rules = React.createClass({
 	},
 	updateField (e) {
 		let rules = this.state.rules;
-		let idx = e.target.getAttribute('data');
+		let idx = e.target.getAttribute('data-idx');
 		rules[idx] = e.target.value;
-		debugger
 		this.setState({rules: rules});
 	},
 	handleSave (e) {
-		debugger
 		chrome.storage.local.set({'rules': this.state.rules});
 	},
 	render () {
 		let distractions = [];
 		this.state.rules.forEach((rule, idx) => {
 			distractions.push(
-				<input type="text" className="distract-entries" key={idx} value={rule} data={idx} onChange={this.updateField}/>
+				<input type="text" className="distract-entries" key={idx} value={rule} data-idx={idx} onChange={this.updateField}/>
 			)
 		});
 		distractions.push(
-			<input type="text" className="distract-entries" key={this.state.rules.length}/>
+			<input type="text" className="distract-entries" key={this.state.rules.length} data-idx={this.state.rules.length} onChange={this.updateField}/>
 		)
 		return (
 			<div className="rules-container">
