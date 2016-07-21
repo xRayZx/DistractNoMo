@@ -14,6 +14,10 @@
 		"tabs",
 		"webRequest",
 		"webRequestBlocking",
-		"storage"
-	]
+		"storage",
+		"<all_urls>"
+	],
+	"background": {
+		"scripts": ["background.js"]
+	}
 }

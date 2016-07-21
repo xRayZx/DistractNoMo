@@ -1,0 +1,22 @@
+body {
+  font-family: sans-serif;
+}
+
+.rules-container {
+  width: 230px;
+}
+
+h3 {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.distract-entries {
+  margin: 5px 0;
+}
