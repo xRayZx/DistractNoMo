@@ -2,26 +2,27 @@ const React = require('react');
 
 const Rules = React.createClass({
 	getInitialState() {
-		// this.rules = [];
-		// chrome.storage.local.get(null, (storage) => {
-		//   this.rules = storage['rules'];
-		// })
 		return(
-			{rules: []}
+			{rules: [],
+				on: false}
 		);
 	},
-	componentDidMount () {
-		// chrome.storage.onChanged.addListener(this.handleChange, "local");
+	componentWillMount () {
 		chrome.storage.local.get(null, (storage) => {
-			this.setState({rules: storage['rules']});
-		})
+			if (typeof storage['rules'] === 'undefined') {
+				chrome.storage.local.set({'rules': []});
+			} else if (typeof storage['on'] === 'undefined') {
+				chrome.storage.local.set({'on': false});
+			}
+		});
 	},
-	handleChange () {
-		this.rules = [];
+	componentDidMount () {
+		this.updateState();
+	},
+	updateState () {
 		chrome.storage.local.get(null, (storage) => {
-			this.rules = storage['rules'];
+			this.setState({rules: storage['rules'], on: storage['on']})
 		})
-		this.setState({rules: this.rules})
 	},
 	updateField (e) {
 		let rules = this.state.rules;
@@ -31,6 +32,11 @@ const Rules = React.createClass({
 	},
 	handleSave (e) {
 		chrome.storage.local.set({'rules': this.state.rules});
+		this.background.rules = this.state.rules
+	},
+	onOff () {
+		this.setState({on: !this.state.on})
+		chrome.storage.local.set({'on': this.state.on});
 	},
 	render () {
 		let distractions = [];
@@ -44,6 +50,7 @@ const Rules = React.createClass({
 		)
 		return (
 			<div className="rules-container">
+				<button onClick={this.onOff} className="on-off">On Off</button>
 				<h3>Add a Distraction</h3>
 				<form className="input-form">
 					{distractions}
