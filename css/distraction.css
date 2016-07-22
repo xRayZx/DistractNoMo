@@ -1,0 +1,25 @@
+body {
+  background-color: #C7EEFF;
+  font-size: 18px;
+}
+
+.cat-container {
+  position: relative;
+}
+
+.cat-pic {
+  display: block;
+  margin: 0 auto;
+  width: 75%;
+}
+
+h2 {
+  position: absolute;
+  display: inline-block;
+  bottom: -67px;
+  font-size: 67px;
+  width: 100%;
+  text-align: center;
+  color: #F1FCFD;
+  text-shadow: 4px 3px #393737;
+}

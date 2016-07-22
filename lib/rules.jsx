@@ -19,6 +19,13 @@ const Rules = React.createClass({
 	componentDidMount () {
 		this.updateState();
 		chrome.storage.onChanged.addListener((changes, area) => {
+			if (typeof changes.on === "boolean") {
+				this.setState({on: changes.on.newValue});
+			}
+			if (changes.rules) {
+				this.setState({rules: changes.rules.newValue});
+			}
+
 			console.log(changes);
 			// changes is an object. access new value using --- changes.rules.newValue
 		})
@@ -46,8 +53,7 @@ const Rules = React.createClass({
 		}
 	},
 	onOff () {
-		this.setState({on: !this.state.on})
-		chrome.storage.local.set({'on': this.state.on});
+		chrome.storage.local.set({'on': !this.state.on});
 	},
 	render () {
 		let distractions = [];

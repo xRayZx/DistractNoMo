@@ -1,5 +1,5 @@
 const redirectAction = function (request) {
-	return {redirectUrl: 'https://www.google.com'}
+	return {redirectUrl: chrome.extension.getURL("distraction.html")}
 }
 
 const listenFromStorage = function () {
