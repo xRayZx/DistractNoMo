@@ -17,19 +17,28 @@ const redirectAction = function (request) {
 	return {redirectUrl: 'https://www.google.com'}
 }
 
-chrome.storage.local.get(null, (storage) => {
-	if (storage['on']) {
-		chrome.webRequest.onBeforeRequest.addListener(redirectAction, {urls: ['*://*.facebook.com/*']}, ['blocking']);
-	} else {
-		chrome.webRequest.onBeforeRequest.removeListener(redirectAction);
-	}
-})
+const listenFromStorage = function () {
+	chrome.storage.local.get(null, (storage) => {
+		urls = storage['rules'].map((url) => {
+			let urlMatcher = url;
+			if (url.includes('www.')) {
+				urlMatcher = url.slice(3);
+			} else {
+				urlMatcher = '.' + url;
+			}
+			return '*://*' + urlMatcher + '/*';
+		});
+
+		if (storage['on']) {
+			chrome.webRequest.onBeforeRequest.addListener(redirectAction, {urls: urls}, ['blocking']);
+		} else {
+			chrome.webRequest.onBeforeRequest.removeListener(redirectAction);
+		}
+	})
+};
+
+listenFromStorage();
 
 chrome.storage.onChanged.addListener((changes, area) => {
-	if (changes.on.newValue) {
-		chrome.webRequest.onBeforeRequest.addListener(redirectAction, {urls: ['*://*.facebook.com/*']}, ['blocking']);
-	} else {
-		chrome.webRequest.onBeforeRequest.removeListener(redirectAction);
-	}
-	// changes is an object. access new value using --- changes.rules.newValue
-})
+	listenFromStorage();
+});
