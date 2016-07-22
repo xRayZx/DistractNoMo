@@ -31,11 +31,19 @@ const Rules = React.createClass({
 	updateField (e) {
 		let rules = this.state.rules;
 		let idx = e.target.getAttribute('data-idx');
-		rules[idx] = e.target.value;
+		if (e.target.value === "") {
+			rules.splice(idx, 1);
+		} else {
+			rules[idx] = e.target.value;
+		}
 		this.setState({rules: rules});
 	},
 	handleSave (e) {
-		chrome.storage.local.set({'rules': this.state.rules});
+		if (this.state.rules[0] === "") {
+			chrome.storage.local.set({'rules': []})
+		} else {
+			chrome.storage.local.set({'rules': this.state.rules});
+		}
 	},
 	onOff () {
 		this.setState({on: !this.state.on})
