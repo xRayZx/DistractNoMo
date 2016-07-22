@@ -18,6 +18,10 @@ const Rules = React.createClass({
 	},
 	componentDidMount () {
 		this.updateState();
+		chrome.storage.onChanged.addListener((changes, area) => {
+			console.log(changes);
+			// changes is an object. access new value using --- changes.rules.newValue
+		})
 	},
 	updateState () {
 		chrome.storage.local.get(null, (storage) => {
@@ -32,7 +36,6 @@ const Rules = React.createClass({
 	},
 	handleSave (e) {
 		chrome.storage.local.set({'rules': this.state.rules});
-		this.background.rules = this.state.rules
 	},
 	onOff () {
 		this.setState({on: !this.state.on})
