@@ -63,7 +63,7 @@ const Rules = React.createClass({
 			)
 		});
 		distractions.push(
-			<input type="text" className="distract-entries" key={this.state.rules.length} data-idx={this.state.rules.length} onChange={this.updateField}/>
+			<input type="text" className="distract-entries" key={this.state.rules.length} value="" data-idx={this.state.rules.length} onChange={this.updateField}/>
 		)
 		return (
 			<div className="rules-container">
