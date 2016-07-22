@@ -4,7 +4,9 @@ const Rules = React.createClass({
 	getInitialState() {
 		return(
 			{rules: [],
-				on: false}
+				on: false,
+				offRequests: 0
+			}
 		);
 	},
 	componentWillMount () {
