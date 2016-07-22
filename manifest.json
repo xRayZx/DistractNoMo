@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Distract No Mo",
-  "description": "Increase productivity by blocking temporarily blocking websites.",
+  "description": "Increase productivity by temporarily blocking websites.",
   "version": "1.0",
 
   "browser_action": {
