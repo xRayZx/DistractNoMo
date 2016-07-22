@@ -4,8 +4,11 @@ body {
 
 .toggle {
   font-size: 36px;
+  text-align: center;
+}
+
+.fa-power-off {
   cursor: pointer;
-  display: inline-block;
 }
 
 .on {
@@ -17,13 +20,13 @@ body {
 }
 
 .rules-container {
-  width: 230px;
+  width: 185px;
 }
 
 h3 {
   font-size: 20px;
   text-align: center;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .input-form {
@@ -32,5 +35,16 @@ h3 {
 }
 
 .distract-entries {
-  margin: 5px 0;
+  margin: 2px 0;
+}
+
+button {
+  margin-top: 5px;
+  cursor: pointer;
+  width: 60px;
+  font-size: 13px;
+  align-self: center;
+  border-radius: 10%;
+  background-color: #eef7fb;
+  border: 1px solid #5fafdd;
 }

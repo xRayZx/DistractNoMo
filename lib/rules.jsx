@@ -62,7 +62,7 @@ const Rules = React.createClass({
 			)
 		});
 		distractions.push(
-			<input type="text" className="distract-entries" key={this.state.rules.length} value="" data-idx={this.state.rules.length} onChange={this.updateField}/>
+				<input type="text" className="distract-entries" key={this.state.rules.length} value="" data-idx={this.state.rules.length} placeholder="Enter URL here (ex. facebook.com)" onChange={this.updateField}/>
 		)
 
 		let onOff = "off";
@@ -71,8 +71,8 @@ const Rules = React.createClass({
 		}
 		return (
 			<div className="rules-container">
-				<div onClick={this.onOff} className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true"></i>
-</div>
+				<div className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true" onClick={this.onOff}></i>
+				</div>
 				<h3>Add a Distraction</h3>
 				<form className="input-form">
 					{distractions}
