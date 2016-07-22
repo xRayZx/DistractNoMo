@@ -19,15 +19,13 @@ const Rules = React.createClass({
 	componentDidMount () {
 		this.updateState();
 		chrome.storage.onChanged.addListener((changes, area) => {
+			// changes is an object. access new value using --- changes.rules.newValue
 			if (typeof changes.on === "boolean") {
 				this.setState({on: changes.on.newValue});
 			}
 			if (changes.rules) {
 				this.setState({rules: changes.rules.newValue});
 			}
-
-			console.log(changes);
-			// changes is an object. access new value using --- changes.rules.newValue
 		})
 	},
 	updateState () {
@@ -54,6 +52,7 @@ const Rules = React.createClass({
 	},
 	onOff () {
 		chrome.storage.local.set({'on': !this.state.on});
+		this.setState({on: !this.state.on});
 	},
 	render () {
 		let distractions = [];
@@ -65,9 +64,15 @@ const Rules = React.createClass({
 		distractions.push(
 			<input type="text" className="distract-entries" key={this.state.rules.length} value="" data-idx={this.state.rules.length} onChange={this.updateField}/>
 		)
+
+		let onOff = "off";
+		if (this.state.on) {
+			onOff = "on"
+		}
 		return (
 			<div className="rules-container">
-				<button onClick={this.onOff} className="on-off">On Off</button>
+				<div onClick={this.onOff} className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true"></i>
+</div>
 				<h3>Add a Distraction</h3>
 				<form className="input-form">
 					{distractions}
