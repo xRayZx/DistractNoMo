@@ -15,6 +15,8 @@ const Rules = React.createClass({
 				chrome.storage.local.set({'rules': []});
 			} else if (typeof storage['on'] === 'undefined') {
 				chrome.storage.local.set({'on': false});
+			} else if (typeof storage['offRequests'] === 'undefined') {
+				chrome.storage.local.set({'offRequests': 0});
 			}
 		});
 	},

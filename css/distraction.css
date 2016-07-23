@@ -5,12 +5,14 @@ body {
 
 .cat-container {
   position: relative;
+  width: 1000px;
+  display: block;
+  margin: 0 auto;
 }
 
 .cat-pic {
   display: block;
-  margin: 0 auto;
-  width: 75%;
+  width: 1000px;
 }
 
 h2 {
@@ -22,4 +24,68 @@ h2 {
   text-align: center;
   color: #F1FCFD;
   text-shadow: 4px 3px #393737;
+}
+
+.big-tear {
+  position: absolute;
+  height: 50px;
+  animation-name: cry;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes cry {
+  0% {
+    bottom: 240px;
+    left: 554px;
+    height: 10px;
+  }
+  30% {
+    bottom: 193px;
+    left: 553px;
+    height: 50px;
+    transform: rotate(-27deg);
+  }
+  45% {
+    bottom: 165px;
+    left: 576px;
+    transform: rotate(-20deg);
+  }
+  52% {
+    bottom: 162px;
+    left: 580px;
+    transform: rotate(-14deg);
+  }
+  57% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    bottom: 90px;
+    left: 568px;
+    transform: rotate(1deg);
+}
+
+.small-tear {
+  position: absolute;
+  height: 50px;
+  animation-name: cry2;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+}
+
+@keyframes cry2 {
+  0% {
+    bottom: 193px;
+    left: 544px;
+    }
+  30% {
+    bottom: 193px;
+    left: 544px;
+  }
+  100% {
+    bottom: 98px;
+    left: 555px;
+  }
 }

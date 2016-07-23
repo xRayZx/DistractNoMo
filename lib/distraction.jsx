@@ -5,13 +5,24 @@ const DistractCat = React.createClass({
     return (
       {offRequests: 0}
     );
-  },
+	},
+	componentDidMount () {
+		this.updateState();
+	},
+	updateState () {
+		chrome.storage.local.get(null, (storage) => {
+			this.setState({offRequests: storage['offRequests']});
+		});
+	},
   render () {
     return (
-      <div className="cat-container">
-        <img src="./assets/sad_cat.jpg" alt="sad big eyed cat" className="cat-pic"/>
-        <h2>Why You No Do Work?</h2>
-      </div>
+			<div>
+				<div className="cat-container">
+					<img src="./assets/sad_cat.jpg" alt="sad big eyed cat" className="cat-pic"/>
+					<h2>Why You No Do Work?</h2>
+					<img src="./assets/teardrop.png" className="big-tear"/>
+				</div>
+			</div>
     );
   }
 });
