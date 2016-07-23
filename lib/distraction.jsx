@@ -21,6 +21,7 @@ const DistractCat = React.createClass({
 					<img src="./assets/sad_cat.jpg" alt="sad big eyed cat" className="cat-pic"/>
 					<h2>Why You No Do Work?</h2>
 					<img src="./assets/teardrop.png" className="big-tear"/>
+          <img src="./assets/small_teardrop.png" className="left-tear"/>
 				</div>
 			</div>
     );
