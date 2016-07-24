@@ -3,6 +3,10 @@ body {
   font-size: 18px;
 }
 
+.main-container {
+  height: 90vh;
+}
+
 .cat-container {
   position: relative;
   width: 1000px;
@@ -26,7 +30,7 @@ h2 {
   text-shadow: 4px 3px #393737;
 }
 
-.big-tear {
+.right-tear {
   position: absolute;
   height: 40px;
   -webkit-animation: rightcry 3s infinite;
@@ -76,4 +80,22 @@ h2 {
     bottom: 98px;
     left: 350px;
   }
+}
+
+.form-container {
+  text-align: center;
+  width: 1000px;
+  height: 300px;
+  position: absolute;
+  padding-top: 50px;
+}
+
+.noSelect {
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+.unlock-input {
+  width: 250px;
 }
