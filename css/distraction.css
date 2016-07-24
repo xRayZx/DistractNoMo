@@ -4,7 +4,7 @@ body {
 }
 
 .main-container {
-  height: 90vh;
+  height: 97vh;
 }
 
 .cat-container {
@@ -59,7 +59,7 @@ h2 {
   }
   100% {
     bottom: 84px;
-    left: 568px;
+    left: 581px;
     transform: rotate(4deg);
   }
 }
@@ -90,6 +90,37 @@ h2 {
   padding-top: 50px;
 }
 
+.form-toggle {
+  display: inline-block;
+  width: 270px;
+  border: 1px solid;
+  border-radius: 5%;
+  cursor: pointer;
+  background-color: #ff9494;
+  box-shadow: 2px 2px gray;
+}
+
+.form-toggle:active {
+  position: relative;
+  top: 2px;
+  box-shadow: 2px 0px lightgray;
+}
+
+.unlock-form {
+  margin-top: 10px;
+}
+
+.sad-text {
+  margin: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.sad-confirm, .noSelect, .unlock-input {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
 .noSelect {
   user-select: none;
   -webkit-touch-callout: none;
@@ -98,4 +129,10 @@ h2 {
 
 .unlock-input {
   width: 250px;
+  height: 23px;
+  text-align: center;
+}
+
+.errors {
+  color: red;
 }

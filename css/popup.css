@@ -30,6 +30,10 @@ header > div {
   cursor: pointer;
 }
 
+.goto-msg {
+  text-align: center;
+}
+
 .on {
   color: green;
 }

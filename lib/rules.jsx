@@ -3,70 +3,72 @@ const React = require('react');
 const Rules = React.createClass({
 	getInitialState() {
 		return(
-			{rules: [],
+			{urls: [],
 				on: false,
-				offRequests: 0
+				visitCat: false
 			}
 		);
 	},
 	componentWillMount () {
 		chrome.storage.local.get(null, (storage) => {
-			if (typeof storage['rules'] === 'undefined') {
-				chrome.storage.local.set({'rules': []});
+			if (typeof storage['urls'] === 'undefined') {
+				chrome.storage.local.set({'urls': []});
 			} else if (typeof storage['on'] === 'undefined') {
 				chrome.storage.local.set({'on': false});
-			} else if (typeof storage['offRequests'] === 'undefined') {
-				chrome.storage.local.set({'offRequests': 0});
-			}
+			} 
 		});
 	},
 	componentDidMount () {
 		this.updateState();
 		chrome.storage.onChanged.addListener((changes, area) => {
-			// changes is an object. access new value using --- changes.rules.newValue
+			// changes is an object. access new value using --- changes.urls.newValue
 			if (typeof changes.on === "boolean") {
 				this.setState({on: changes.on.newValue});
 			}
-			if (changes.rules) {
-				this.setState({rules: changes.rules.newValue});
+			if (changes.urls) {
+				this.setState({urls: changes.urls.newValue});
 			}
 		})
 	},
 	updateState () {
 		chrome.storage.local.get(null, (storage) => {
-			this.setState({rules: storage['rules'], on: storage['on']})
+			this.setState({urls: storage['urls'], on: storage['on']})
 		})
 	},
 	updateField (e) {
-		let rules = this.state.rules;
+		let urls = this.state.urls;
 		let idx = e.target.getAttribute('data-idx');
 		if (e.target.value === "") {
-			rules.splice(idx, 1);
+			urls.splice(idx, 1);
 		} else {
-			rules[idx] = e.target.value;
+			urls[idx] = e.target.value;
 		}
-		this.setState({rules: rules});
+		this.setState({urls: urls});
 	},
 	handleSave (e) {
-		if (this.state.rules[0] === "") {
-			chrome.storage.local.set({'rules': []})
+		if (this.state.urls[0] === "") {
+			chrome.storage.local.set({'urls': []})
 		} else {
-			chrome.storage.local.set({'rules': this.state.rules});
+			chrome.storage.local.set({'urls': this.state.urls});
 		}
 	},
 	onOff () {
-		chrome.storage.local.set({'on': !this.state.on});
-		this.setState({on: !this.state.on});
+		if (this.state.on) {
+			this.setState({visitCat: true});
+		} else {
+			chrome.storage.local.set({'on': !this.state.on});
+			this.setState({on: !this.state.on});
+		}
 	},
 	render () {
 		let distractions = [];
-		this.state.rules.forEach((rule, idx) => {
+		this.state.urls.forEach((rule, idx) => {
 			distractions.push(
 				<input type="text" className="distract-entries" key={idx} value={rule} data-idx={idx} onChange={this.updateField}/>
 			)
 		});
 		distractions.push(
-				<input type="text" className="distract-entries" key={this.state.rules.length} value="" data-idx={this.state.rules.length} placeholder="URL here (ex. facebook.com)" onChange={this.updateField}/>
+				<input type="text" className="distract-entries" key={this.state.urls.length} value="" data-idx={this.state.urls.length} placeholder="URL here (ex. facebook.com)" onChange={this.updateField}/>
 		)
 
 		let onOff = "off";
@@ -80,6 +82,7 @@ const Rules = React.createClass({
 				</header>
 				<div className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true" onClick={this.onOff}></i>
 				</div>
+				{this.state.visitCat ? <div className="goto-msg"> To turn off, <br/> Visit a distraction page</div> : null}
 				<h3>Add a Distraction</h3>
 				<form className="input-form">
 					{distractions}

@@ -1,14 +1,14 @@
 const redirectAction = function (request) {
+	chrome.storage.local.set({'urlAttempted': request.url});
 	return {redirectUrl: chrome.extension.getURL("distraction.html")}
 }
 
 const listenFromStorage = function () {
 	chrome.storage.local.get(null, (storage) => {
-		debugger
-		if (storage['rules'].length === 0 || !storage['on']) {
+		if (storage['urls'].length === 0 || !storage['on']) {
 			chrome.webRequest.onBeforeRequest.removeListener(redirectAction);
 		} else {
-			urls = storage['rules'].map((url) => {
+			urls = storage['urls'].map((url) => {
 				let urlMatcher = url;
 				if (url.includes('www.')) {
 					urlMatcher = url.slice(3);

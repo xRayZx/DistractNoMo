@@ -25,8 +25,11 @@ const DistractCat = React.createClass({
 				let numRequests = this.state.offRequests + 1;
 				if (numRequests > 2) {
 					chrome.storage.local.set({'on': false});
+					chrome.storage.local.get(null, function (result) {
+						window.location.assign(result.urlAttempted);
+					});
 				} else {
-					this.setState({offRequests: numRequests, showForm: false});
+					this.setState({offRequests: numRequests, random: stringGen()});
 				}
 			} else {
 				this.setState({error: true, random: stringGen()});
@@ -46,23 +49,23 @@ const DistractCat = React.createClass({
 		);
 
 		let sadText = "Kitty will become very sad...";
-		let confirm = "If you are sure, please enter the unlock code below:";
+		let confirm = "If you are sure, enter the unlock code:";
 
 		if (this.state.offRequests === 1) {
-			sadText = "Kitty will become super sad...";
-			confirm = "Are you absolute sure? If so, enter the unlock code once more:";
+			sadText = "You made the cat cry!";
+			confirm = "Do you want to make it worse? If so, enter the unlock code once more:";
 		} else if (this.state.offRequests === 2) {
-			sadText = "Kitty's sadness will become unbearable...";
-			confirm = "You will take full responsibility for the sadness! Enter the unlock code one last time:"
+			sadText = "Kitty's sadness has became unbearable...";
+			confirm = "You will take full responsibility for such sadness! Enter the unlock code one last time:"
 		}
 		let theForm = (
-			<div>
-				<div>{sadText}</div>
-				<div>{confirm}</div>
+			<div className="unlock-form">
+				<div className="sad-text">{sadText}</div>
+				<div className="sad-confirm">{confirm}</div>
 				<div className="noSelect">{this.state.random}</div>
-				<input type="text" className="unlock-input" onKeyPress={this.handleSubmit}/>
-				<div>
-					{this.state.error ? "Unlock Code was entered wrong. Please try again if you wish to make kitty sad." : null}
+				<input type="text" className="unlock-input" onKeyPress={this.handleSubmit} placeholder="Enter Code Here"/>
+				<div className="errors">
+					{this.state.error ? "Unlock Code was entered wrong. Try again if you wish to make kitty sad." : null}
 				</div>
 			</div>
 		);
@@ -74,7 +77,11 @@ const DistractCat = React.createClass({
 					{this.state.offRequests >= 1 ? rightTear : null}
 					{this.state.offRequests >= 1 ? leftTear : null}
 					<div className="form-container">
-						<label onClick={this.toggleForm}>Want to disable Distract No Mo?</label>
+					<div onClick={this.toggleForm} className="form-toggle">
+						disable <br/><strong>Cat No Distract</strong> 
+						<br/>
+						and continue to your distraction
+					</div>
 						{this.state.showForm ? theForm : null}
 					</div>
 				</div>
