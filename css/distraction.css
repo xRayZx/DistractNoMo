@@ -99,6 +99,9 @@ h2 {
   cursor: pointer;
   background-color: #FFC09F;
   box-shadow: 2px 2px gray;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
 }
 
 .form-toggle:active {
