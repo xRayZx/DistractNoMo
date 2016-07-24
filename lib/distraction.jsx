@@ -37,9 +37,13 @@ const DistractCat = React.createClass({
 		}
 	},
   render () {
+		if (this.state.offRequests === 1) {
+			document.getElementsByTagName('body')[0].style.backgroundColor = '#abc7ce';
+		}
 		let main = "main-container";
 		if (this.state.offRequests >= 2) {
 			main = "main-container weather rain";
+			document.getElementsByTagName('body')[0].style.backgroundColor = '#b5c1c4';
 		}
 		let rightTear = (
 			<img src="./assets/teardrop.png" className="right-tear"/>
@@ -55,7 +59,7 @@ const DistractCat = React.createClass({
 			sadText = "You made the cat cry!";
 			confirm = "Do you want to make it worse? If so, enter the unlock code once more:";
 		} else if (this.state.offRequests === 2) {
-			sadText = "Kitty's sadness has became unbearable...";
+			sadText = "Kitty's sadness has become unbearable...";
 			confirm = "You will take full responsibility for such sadness! Enter the unlock code one last time:"
 		}
 		let theForm = (
@@ -78,7 +82,7 @@ const DistractCat = React.createClass({
 					{this.state.offRequests >= 1 ? leftTear : null}
 					<div className="form-container">
 					<div onClick={this.toggleForm} className="form-toggle">
-						disable <br/><strong>Cat No Distract</strong> 
+						Disable <br/><strong>Distract No Mo</strong> 
 						<br/>
 						and continue to your distraction
 					</div>

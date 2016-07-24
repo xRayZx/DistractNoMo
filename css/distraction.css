@@ -1,10 +1,11 @@
 body {
-  background-color: #C7EEFF;
+  background-color: #A0CED9;
   font-size: 18px;
 }
 
 .main-container {
-  height: 97vh;
+  height: 98vh;
+  min-height: 820px;
 }
 
 .cat-container {
@@ -26,7 +27,7 @@ h2 {
   font-size: 67px;
   width: 100%;
   text-align: center;
-  color: #F1FCFD;
+  color: #FFEE93;
   text-shadow: 4px 3px #393737;
 }
 
@@ -96,14 +97,14 @@ h2 {
   border: 1px solid;
   border-radius: 5%;
   cursor: pointer;
-  background-color: #ff9494;
+  background-color: #FFC09F;
   box-shadow: 2px 2px gray;
 }
 
 .form-toggle:active {
   position: relative;
   top: 2px;
-  box-shadow: 2px 0px lightgray;
+  box-shadow: 0px 0px lightgray;
 }
 
 .unlock-form {
@@ -131,6 +132,7 @@ h2 {
   width: 250px;
   height: 23px;
   text-align: center;
+  background-color: #FCF5C7;
 }
 
 .errors {
