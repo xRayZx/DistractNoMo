@@ -5,23 +5,32 @@ const DistractCat = React.createClass({
     return (
 			{offRequests: 0,
 				random: '',
-			showForm: false}
+				showForm: false,
+				error: false
+			}
     );
-	},
-	componentDidMount () {
-		this.updateState();
-	},
-	updateState () {
-		chrome.storage.local.get(null, (storage) => {
-			this.setState({offRequests: storage['offRequests']});
-		});
 	},
 	toggleForm () {
 		if (this.state.showForm) {
-			this.setState({showForm: false, random: ''});
+			this.setState({showForm: false, random: '', error: false});
 		} else {
 			let string = stringGen();
 			this.setState({showForm: true, random: string});
+		}
+	},
+	handleSubmit (e) {
+		if (e.key === 'Enter') {
+			if (e.target.value === this.state.random) {
+				this.setState({error: false});
+				let numRequests = this.state.offRequests + 1;
+				if (numRequests > 2) {
+					chrome.storage.local.set({'on': false});
+				} else {
+					this.setState({offRequests: numRequests, showForm: false});
+				}
+			} else {
+				this.setState({error: true, random: stringGen()});
+			}
 		}
 	},
   render () {
@@ -35,12 +44,26 @@ const DistractCat = React.createClass({
 		let leftTear = (
 			<img src="./assets/small_teardrop.png" className="left-tear"/>
 		);
+
+		let sadText = "Kitty will become very sad...";
+		let confirm = "If you are sure, please enter the unlock code below:";
+
+		if (this.state.offRequests === 1) {
+			sadText = "Kitty will become super sad...";
+			confirm = "Are you absolute sure? If so, enter the unlock code once more:";
+		} else if (this.state.offRequests === 2) {
+			sadText = "Kitty's sadness will become unbearable...";
+			confirm = "You will take full responsibility for the sadness! Enter the unlock code one last time:"
+		}
 		let theForm = (
 			<div>
-				<div>Kitty will become very sad...</div>
-				<div>If you are sure, please enter the unlock code below:</div>
+				<div>{sadText}</div>
+				<div>{confirm}</div>
 				<div className="noSelect">{this.state.random}</div>
-				<input type="text" className="unlock-input"/>
+				<input type="text" className="unlock-input" onKeyPress={this.handleSubmit}/>
+				<div>
+					{this.state.error ? "Unlock Code was entered wrong. Please try again if you wish to make kitty sad." : null}
+				</div>
 			</div>
 		);
     return (
@@ -66,7 +89,7 @@ const stringGen = function () {
 	let text = "";
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-	for (let i = 0; i < 25; i++) {
+	for (let i = 0; i < 5; i++) {
 		text += charset.charAt(Math.floor(Math.random() * charset.length));
 	}
 
