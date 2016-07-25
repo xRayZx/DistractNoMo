@@ -36,14 +36,18 @@ const Rules = React.createClass({
 		})
 	},
 	updateField (e) {
-		let urls = this.state.urls;
-		let idx = e.target.getAttribute('data-idx');
-		if (e.target.value === "") {
-			urls.splice(idx, 1);
+		if (this.state.on) {
+			this.setState({urls: this.state.urls});
 		} else {
-			urls[idx] = e.target.value;
+			let urls = this.state.urls;
+			let idx = e.target.getAttribute('data-idx');
+			if (e.target.value === "") {
+				urls.splice(idx, 1);
+			} else {
+				urls[idx] = e.target.value;
+			}
+			this.setState({urls: urls});
 		}
-		this.setState({urls: urls});
 	},
 	handleSave (e) {
 		if (this.state.urls[0] === "") {
@@ -53,7 +57,7 @@ const Rules = React.createClass({
 		}
 	},
 	onOff () {
-		if (this.state.on) {
+		if (this.state.on && this.state.urls.length > 0) {
 			this.setState({visitCat: true});
 		} else {
 			chrome.storage.local.set({'on': !this.state.on});
@@ -67,9 +71,11 @@ const Rules = React.createClass({
 				<input type="text" className="distract-entries" key={idx} value={rule} data-idx={idx} onChange={this.updateField}/>
 			)
 		});
-		distractions.push(
-				<input type="text" className="distract-entries" key={this.state.urls.length} value="" data-idx={this.state.urls.length} placeholder="URL here (ex. facebook.com)" onChange={this.updateField}/>
-		)
+		if (!this.state.on) {
+			distractions.push(
+					<input type="text" className="distract-entries" key={this.state.urls.length} value="" data-idx={this.state.urls.length} placeholder="URL here (ex. facebook.com)" onChange={this.updateField}/>
+			)
+		}
 
 		let onOff = "off";
 		if (this.state.on) {

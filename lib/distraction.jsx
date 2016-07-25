@@ -82,9 +82,9 @@ const DistractCat = React.createClass({
 					{this.state.offRequests >= 1 ? leftTear : null}
 					<div className="form-container">
 					<div onClick={this.toggleForm} className="form-toggle">
-						Disable <br/><strong>Distract No Mo</strong> 
-						<br/>
-						and continue to your distraction
+						Disable
+            <br/>
+            <strong>Distract No Mo</strong> 
 					</div>
 						{this.state.showForm ? theForm : null}
 					</div>
