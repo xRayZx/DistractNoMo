@@ -3,7 +3,7 @@
 
   "name": "Focus Cat",
   "description": "Increase productivity by temporarily blocking websites.",
-  "version": "1.1",
+  "version": "1.2",
 
   "browser_action": {
     "default_icon": "icon.png",

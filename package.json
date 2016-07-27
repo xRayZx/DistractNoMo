@@ -1,5 +1,5 @@
 {
-  "name": "DistractNoMo",
+  "name": "FocusCat",
   "version": "1.0.0",
   "description": "Manage your distractions and stay productive",
   "main": "popup.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xRayZx/DistractNoMo.git"
+    "url": "git+https://github.com/xRayZx/FocusCat.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xRayZx/DistractNoMo/issues"
+    "url": "https://github.com/xRayZx/FocusCat/issues"
   },
-  "homepage": "https://github.com/xRayZx/DistractNoMo#readme",
+  "homepage": "https://github.com/xRayZx/FocusCat#readme",
   "dependencies": {
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
