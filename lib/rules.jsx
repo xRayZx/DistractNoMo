@@ -84,7 +84,7 @@ const Rules = React.createClass({
 		return (
 			<div className="rules-container">
 				<header>
-					<div>Distract No Mo</div>
+					<div>Focus Cat</div>
 				</header>
 				<div className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true" onClick={this.onOff}></i>
 				</div>

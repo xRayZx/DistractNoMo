@@ -1,6 +1,6 @@
 const React = require('react');
 
-const DistractCat = React.createClass({
+const FocusCat = React.createClass({
   getInitialState() {
     return (
 			{offRequests: 0,
@@ -84,7 +84,7 @@ const DistractCat = React.createClass({
 					<div onClick={this.toggleForm} className="form-toggle">
 						Disable
             <br/>
-            <strong>Distract No Mo</strong> 
+            <strong>Focus Cat</strong> 
 					</div>
 						{this.state.showForm ? theForm : null}
 					</div>
@@ -94,7 +94,7 @@ const DistractCat = React.createClass({
   }
 });
 
-module.exports = DistractCat;
+module.exports = FocusCat;
 
 const stringGen = function () {
 	let text = "";

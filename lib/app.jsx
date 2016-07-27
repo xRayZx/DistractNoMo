@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const Rules = require('./rules.jsx');
-const DistractCat = require('./distraction.jsx');
+const FocusCat = require('./distraction.jsx');
 
 document.addEventListener("DOMContentLoaded", function () {
 	const root = document.getElementById("root");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const distractRoot = document.getElementById("distraction");
 	if (distractRoot) {
 		ReactDOM.render(
-			<DistractCat />,
+			<FocusCat />,
 			distractRoot
 		)
 	}
