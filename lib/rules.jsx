@@ -12,10 +12,10 @@ const Rules = React.createClass({
 	componentWillMount () {
 		chrome.storage.local.get(null, (storage) => {
 			if (typeof storage['urls'] === 'undefined') {
-				chrome.storage.local.set({'urls': []});
+				chrome.storage.local.set({'urls': ['facebook.com', 'reddit.com', 'imgur.com', '9gag.com', 'twitter.com']});
 			} else if (typeof storage['on'] === 'undefined') {
-				chrome.storage.local.set({'on': false});
-			} 
+				chrome.storage.local.set({'on': true});
+			}
 		});
 	},
 	componentDidMount () {
@@ -65,10 +65,17 @@ const Rules = React.createClass({
 		}
 	},
 	render () {
+		let onOff = "off";
+		let entries = "distract-entries";
+		if (this.state.on) {
+			onOff = "on"
+			entries = "distract-entries-disabled";
+		}
+
 		let distractions = [];
 		this.state.urls.forEach((rule, idx) => {
 			distractions.push(
-				<input type="text" className="distract-entries" key={idx} value={rule} data-idx={idx} onChange={this.updateField}/>
+				<input type="text" className={entries} key={idx} value={rule} data-idx={idx} onChange={this.updateField}/>
 			)
 		});
 		if (!this.state.on) {
@@ -77,10 +84,6 @@ const Rules = React.createClass({
 			)
 		}
 
-		let onOff = "off";
-		if (this.state.on) {
-			onOff = "on"
-		}
 		return (
 			<div className="rules-container">
 				<header>
@@ -89,10 +92,11 @@ const Rules = React.createClass({
 				<div className={"toggle " + onOff}><i className="fa fa-power-off" aria-hidden="true" onClick={this.onOff}></i>
 				</div>
 				{this.state.visitCat ? <div className="goto-msg"> To turn off, <br/> Visit a distraction page</div> : null}
-				<h3>Add a Distraction</h3>
+				<h3>{this.state.on ? "Distractions List" : "Edit Distractions"}</h3>
 				<form className="input-form">
 					{distractions}
-					<button onClick={this.handleSave}>Save!</button>
+					<span>{this.state.on ? "Disable to edit URLs" : null}</span>
+					{this.state.on ? null : <button onClick={this.handleSave}>Save!</button>}
 				</form>
 			</div>
 		)

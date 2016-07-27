@@ -35,11 +35,11 @@ header > div {
 }
 
 .on {
-  color: green;
+  color: red;
 }
 
 .off {
-  color: red;
+  color: blue;
 }
 
 .rules-container {
@@ -48,7 +48,7 @@ header > div {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 19px;
   text-align: center;
   margin: 0;
 }
@@ -60,6 +60,23 @@ h3 {
 
 .distract-entries {
   margin: 2px 0;
+}
+
+.distract-entries-disabled, .distract-entries-disabled:focus {
+  background-color: #f7f7f7;
+  border: 0;
+  font-size: 13px;
+  cursor: default;
+  outline: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+.input-form span {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 13px;
 }
 
 button {
